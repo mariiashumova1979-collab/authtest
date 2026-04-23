@@ -3,25 +3,27 @@
 <head><meta charset="UTF-8"><title>Test</title></head>
 <body>
 <h1>Telegram Login Test</h1>
-<script async src="https://telegram.org/js/telegram-widget.js?22"
-  data-telegram-login="Auth_test121223_bot"
-  data-size="large"
-  data-auth-url="https://mariiashumova1979-collab.github.io/authtest/"
-  data-request-access="write">
-</script>
+<div id="result"></div>
+
 <script>
-// Данные придут как URL параметры после редиректа
+// Проверяем URL параметры (после redirect)
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 if (id) {
-  document.body.innerHTML = `
-    <h1>Авторизация успешна!</h1>
-    <p>ID: ${params.get('id')}</p>
-    <p>Имя: ${params.get('first_name')} ${params.get('last_name') || ''}</p>
-    <p>Username: ${params.get('username')}</p>
-    <p>Photo: ${params.get('photo_url')}</p>
-  `;
+  document.getElementById('result').innerHTML = `
+    <h2>Авторизация успешна!</h2>
+    <p>ID: ${params.get('id')}</p>
+    <p>Имя: ${params.get('first_name')} ${params.get('last_name') || ''}</p>
+    <p>Username: @${params.get('username') || '—'}</p>
+  `;
 }
+</script>
+
+<script async src="https://telegram.org/js/telegram-widget.js?22"
+  data-telegram-login="Auth_test121223_bot"
+  data-size="large"
+  data-auth-url="https://mariiashumova1979-collab.github.io/authtest/"
+  data-request-access="write">
 </script>
 </body>
 </html>

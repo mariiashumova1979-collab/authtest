@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Войти</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+    background: #1a1a18;
+    border-radius: 16px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo svg { width: 28px; height: 28px; fill: #fff; }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a18;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #73726c;
+    margin-bottom: 36px;
+    line-height: 1.5;
+  }
+
+  .tg-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: #2AABEE;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    text-decoration: none;
+  }
+
+  .tg-btn:hover { background: #1e96d4; }
+  .tg-btn:active { transform: scale(0.98); }
+
+  .tg-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: #fff;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #b4b2a9;
+    font-size: 12px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e6df;
+  }
+
+  .terms {
+    font-size: 12px;
+    color: #b4b2a9;
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+
+  .terms a { color: #73726c; text-decoration: underline; }
+
+  /* State: loading */
+  .card.loading .tg-btn {
+    background: #a8d8f0;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+  }
+
+  .card.loading .spinner { display: block; }
+  .card.loading .tg-icon { display: none; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* State: success */
+  .success-screen {
+    display: none;
+  }
+
+  .card.success .auth-screen { display: none; }
+  .card.success .success-screen { display: block; }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #e8e6df;
+    margin: 0 auto 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .user-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a18;
+    margin-bottom: 4px;
+  }
+
+  .user-handle {
+    font-size: 14px;
+    color: #73726c;
+    margin-bottom: 8px;
+  }
+
+  .user-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #3b6d11;
+    background: #eaf3de;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+
+  .logout-btn {
+    background: none;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-size: 13px;
+    color: #73726c;
+    cursor: pointer;
+    transition: background .15s;
+  }
+
+  .logout-btn:hover { background: #f5f4f0; }
+
+  /* Demo notice */
+  .demo-notice {
+    background: #faeeda;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #854f0b;
+    margin-bottom: 20px;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .demo-notice strong { display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+
+  <!-- Auth screen -->
+  <div class="auth-screen">
+    <div class="logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    </div>
+
+    <h1>Добро пожаловать</h1>
+    <p class="subtitle">Войдите в аккаунт чтобы продолжить</p>
+
+    <div class="demo-notice">
+      <strong>🔧 Это прототип</strong>
+      Для реальной работы подключи Telegram Login SDK с твоим client_id от @BotFather.
+    </div>
+
+    <button class="tg-btn" id="tgBtn" onclick="handleTelegramLogin()">
+      <svg class="tg-icon" viewBox="0 0 24 24">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.847l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.712z"/>
+      </svg>
+      <div class="spinner"></div>
+      Продолжить с Telegram
+    </button>
+
+    <p class="terms">
+      Нажимая кнопку, вы соглашаетесь с <a href="#">условиями использования</a>
+      и <a href="#">политикой конфиденциальности</a>
+    </p>
+  </div>
+
+  <!-- Success screen -->
+  <div class="success-screen">
+    <div class="avatar" id="userAvatar">👤</div>
+    <div class="user-name" id="userName">—</div>
+    <div class="user-handle" id="userHandle">—</div>
+    <div class="user-phone" id="userPhone">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+      </svg>
+      —
+    </div>
+    <button class="logout-btn" onclick="handleLogout()">Выйти</button>
+  </div>
+
+</div>
+
+<script>
+const CLIENT_ID = '8621756325';
+
+function handleTelegramLogin() {
+  const card = document.getElementById('card');
+  card.classList.add('loading');
+
+  if (typeof Telegram === 'undefined') {
+    card.classList.remove('loading');
+    alert('Telegram SDK не загрузился. Проверь что домен добавлен в @BotFather → Bot Settings → Web Login');
+    return;
+  }
+
+  Telegram.Login.auth(
+    { client_id: CLIENT_ID, request_access: ['phone', 'write'] },
+    (data) => {
+      card.classList.remove('loading');
+      onTelegramAuth(data);
+    }
+  );
+}
+
+function onTelegramAuth(data) {
+  const card = document.getElementById('card');
+  card.classList.remove('loading');
+
+  if (data.error) {
+    alert('Ошибка авторизации: ' + data.error);
+    return;
+  }
+
+  // В реальном приложении здесь:
+  // fetch('/auth/telegram', { method: 'POST', body: JSON.stringify({ id_token: data.id_token }) })
+  // и ждём ответа от бэкенда с верифицированными данными
+  document.getElementById('userName').textContent = u.name;
+  document.getElementById('userHandle').textContent = '@' + u.preferred_username;
+  document.getElementById('userPhone').innerHTML = `
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+    </svg>
+    ${u.phone_number}
+  `;
+
+  if (u.picture) {
+    document.getElementById('userAvatar').innerHTML = `<img src="${u.picture}" alt="">`;
+  } else {
+    document.getElementById('userAvatar').textContent = u.name[0];
+  }
+
+  card.classList.add('success');
+}
+
+function handleLogout() {
+  document.getElementById('card').classList.remove('success');
+}
+
+// ─── REAL INTEGRATION ────────────────────────────────────────
+// Когда будет client_id от @BotFather, раскомментируй:
+//
+// const CLIENT_ID = 'ВАШ_CLIENT_ID';
+//
+// document.getElementById('tgBtn').addEventListener('click', () => {
+//   Telegram.Login.auth(
+//     { client_id: CLIENT_ID, request_access: ['phone', 'write'] },
+//     onTelegramAuth
+//   );
+// });
+</script>
+
+<!-- Telegram Login SDK -->
+<script async src="https://oauth.telegram.org/js/telegram-login.js?3"
+  data-client-id="8621756325"></script>
+
+</body>
+</html>

@@ -1,1 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Telegram Login Demo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0f1720; color:#eef4ff; min-height:100vh; display:grid; place-items:center; margin:0; }
+    .card { width:min(560px, calc(100vw - 32px)); background:#172230; border:1px solid #29384a; border-radius:18px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+    h1 { margin:0 0 8px; font-size:26px; }
+    p { color:#9fb0c6; line-height:1.5; }
+    a.button { display:inline-flex; align-items:center; justify-content:center; gap:10px; margin-top:14px; padding:12px 18px; border-radius:12px; background:#2aabee; color:white; text-decoration:none; font-weight:700; }
+    pre { margin-top:18px; white-space:pre-wrap; background:#0b1118; border:1px solid #29384a; border-radius:12px; padding:14px; color:#d7e7ff; overflow:auto; }
+    .error { color:#ff8aa0; }
+    .ok { color:#7ee8a2; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Log in with Telegram</h1>
+    <p>Демо через Telegram OpenID Connect. После авторизации Telegram вернёт пользователя на <code>/api/auth-callback</code>.</p>
+    <a class="button" href="/api/auth-start">Sign in with Telegram</a>
+    <pre id="result">Нажми кнопку для входа.</pre>
+  </main>
 
+  <script>
+    const params = new URLSearchParams(location.search);
+    const result = document.getElementById('result');
+
+    if (params.get('tg_success') === '1') {
+      result.className = 'ok';
+      result.textContent = JSON.stringify({
+        success: true,
+        tg_id: params.get('tg_id'),
+        name: params.get('name'),
+        username: params.get('username'),
+        phone: params.get('phone'),
+        picture: params.get('picture')
+      }, null, 2);
+    } else if (params.get('tg_error')) {
+      result.className = 'error';
+      result.textContent = JSON.stringify({
+        success: false,
+        error: params.get('tg_error'),
+        details: params.get('tg_error_details')
+      }, null, 2);
+    }
+  </script>
+</body>
+</html>

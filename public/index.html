@@ -3,107 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Freedom24 · Telegram Login Demo</title>
+  <title>Freedom24 Telegram Login Demo</title>
   <style>
     * { box-sizing: border-box; }
+
+    :root {
+      --green: #18a957;
+      --green-dark: #128744;
+      --green-soft: #edf8e6;
+      --blue: #229ed9;
+      --text: #07142f;
+      --muted: #667085;
+      --line: #e1e6ee;
+      --panel: #ffffff;
+      --soft: #f5f7fa;
+      --header: #ffffff;
+    }
+
     body {
       margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #fff;
-      color: #07142f;
       min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      background: #ffffff;
+      color: var(--text);
     }
 
     .topbar {
-      height: 44px;
+      height: 48px;
       border-bottom: 1px solid #e5e7eb;
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: #fff;
-      position: relative;
-      z-index: 5;
-    }
-
-    .top-inner {
-      width: min(1120px, calc(100vw - 40px));
-      display: flex;
-      align-items: center;
       justify-content: space-between;
+      padding: 0 42px;
+      background: var(--header);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .logo {
       font-weight: 900;
-      letter-spacing: -0.3px;
+      font-size: 17px;
+      letter-spacing: .2px;
       color: #111827;
     }
 
-    .brand-shield {
-      width: 22px;
-      height: 26px;
-      background: linear-gradient(180deg, #2bbf62, #168f43);
-      border-radius: 4px 4px 10px 10px;
-      position: relative;
-    }
-
-    .brand-shield:after {
-      content: "";
-      position: absolute;
-      left: 7px;
-      top: 6px;
-      width: 9px;
-      height: 12px;
-      background: #0c662d;
-      border-radius: 2px 2px 6px 6px;
-    }
-
-    .brand span { color: #159947; }
+    .logo span { color: var(--green); }
 
     .nav {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 12px;
       font-size: 13px;
-      color: #566176;
+      color: #475569;
     }
 
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #566176;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .grid-icon {
-      width: 16px;
-      height: 16px;
-      display: grid;
-      grid-template-columns: repeat(3, 4px);
-      grid-template-rows: repeat(3, 4px);
-      gap: 2px;
-    }
-
-    .grid-icon i {
-      width: 4px;
-      height: 4px;
-      background: #9aa3b2;
-      border-radius: 1px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: #566176;
-    }
-
-    .login-btn, .open-btn {
+    .nav-btn {
       height: 32px;
       padding: 0 18px;
       border-radius: 4px;
@@ -111,82 +63,116 @@
       cursor: pointer;
     }
 
-    .login-btn {
-      background: #fff;
+    .nav-btn.login {
       border: 1px solid #d9dee7;
-      color: #172033;
+      background: #fff;
+      color: #111827;
     }
 
-    .open-btn {
-      background: #19a957;
-      border: 1px solid #19a957;
+    .nav-btn.open {
+      border: 1px solid var(--green);
+      background: var(--green);
       color: #fff;
     }
 
-    .hamb {
-      font-size: 20px;
-      line-height: 1;
-      color: #566176;
-    }
-
     .main {
-      width: min(1120px, calc(100vw - 40px));
-      min-height: calc(100vh - 44px);
+      max-width: 1180px;
       margin: 0 auto;
+      min-height: calc(100vh - 48px);
       display: grid;
       grid-template-columns: 430px 1fr;
-      gap: 78px;
+      gap: 82px;
       align-items: center;
+      padding: 42px 24px 54px;
     }
 
     .left h1 {
-      margin: 0 0 34px;
-      font-size: 31px;
-      line-height: 1.1;
+      margin: 0 0 30px;
+      font-size: 33px;
+      line-height: 1.08;
       font-weight: 900;
-      letter-spacing: -0.8px;
-      color: #06152e;
+      letter-spacing: -.5px;
     }
 
     .back {
       display: inline-block;
       margin-bottom: 14px;
       font-size: 13px;
-      color: #159947;
+      color: var(--green);
       font-weight: 700;
       text-decoration: none;
+      cursor: pointer;
+    }
+
+    .login-start {
+      width: 405px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .login-start p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .tg-button {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .tg-logo {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
     }
 
     .tg-status {
+      width: 405px;
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 12px;
-      padding: 10px 13px;
-      border-radius: 7px;
-      background: #eaf7e2;
-      color: #2e750f;
-      font-size: 12px;
-      width: 405px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: var(--green-soft);
+      color: #2f6d0f;
+      font-size: 13px;
+      border: 1px solid #d8efcb;
     }
 
     .tg-status b {
       display: block;
-      font-size: 12.5px;
       margin-bottom: 2px;
-    }
-
-    .tg-status small {
-      display: block;
-      color: #4b7f31;
-      font-size: 12px;
+      font-size: 13px;
+      color: #245a0b;
     }
 
     .check {
-      width: 22px;
-      height: 22px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
-      background: #55ad29;
+      background: #62b82f;
       color: #fff;
       display: flex;
       align-items: center;
@@ -195,14 +181,63 @@
       flex-shrink: 0;
     }
 
+    .verification-flow {
+      width: 405px;
+      margin: 0 0 16px;
+      border: 1px solid #dfe7ef;
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #edf1f5;
+      font-size: 13px;
+    }
+
+    .flow-step:last-child { border-bottom: 0; }
+
+    .flow-step .num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    .flow-step b {
+      display: block;
+      color: #111827;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.35;
+      font-size: 12px;
+    }
+
+    .flow-step strong { color: #111827; }
+
     .accounts {
       width: 405px;
-      max-height: 480px;
       border: 1px solid #dfe3ea;
       border-radius: 4px;
       overflow: hidden;
       background: #fff;
-      box-shadow: 0 2px 7px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
     }
 
     .group {
@@ -211,31 +246,27 @@
       background: #f1f2f5;
       font-size: 14px;
       font-weight: 900;
-      color: #07142f;
+      color: #111827;
     }
 
     .account {
-      min-height: 38px;
-      padding: 9px 14px;
-      border-top: 1px solid #e3e7ee;
+      min-height: 39px;
+      padding: 10px 14px;
+      border-top: 1px solid #e5e7eb;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 13.5px;
+      font-size: 14px;
       cursor: pointer;
-      color: #07142f;
+      transition: background .15s;
     }
 
-    .account:hover { background: #f7fbff; }
+    .account:hover { background: #f7fafc; }
     .account.active { background: #f8fbff; }
-
     .account b { font-weight: 900; }
-    .account strong {
-      font-weight: 900;
-      font-size: 13px;
-    }
+    .account strong { font-weight: 900; font-size: 13px; }
 
-    .badge {
+    .tag {
       margin-left: 8px;
       padding: 3px 8px;
       border-radius: 12px;
@@ -245,423 +276,271 @@
       font-weight: 900;
     }
 
-    .crypto {
-      min-height: 36px;
-      padding: 9px 14px;
-      border-top: 1px solid #e3e7ee;
-      color: #788295;
-      font-size: 12px;
+    .error-box {
+      width: 405px;
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid #fecdd3;
+      background: #fff1f2;
+      color: #be123c;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .right {
-      height: 650px;
+      min-height: 620px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: visible;
     }
 
     .hero {
       position: relative;
-      width: 590px;
-      height: 560px;
-      transform: translateX(16px);
-    }
-
-    .cube {
-      position: absolute;
-      left: 160px;
-      top: 310px;
-      width: 330px;
-      height: 245px;
-      border-radius: 30px;
-      background: linear-gradient(140deg, #00e46f 0%, #05c862 48%, #0aa850 100%);
-      box-shadow: 0 34px 80px rgba(0, 200, 95, 0.35);
-      transform: perspective(650px) rotateX(5deg) rotateY(-8deg);
-    }
-
-    .cube:before {
-      content: "";
-      position: absolute;
-      left: 28px;
-      top: 22px;
-      width: 220px;
-      height: 110px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.12);
-      filter: blur(1px);
+      width: 560px;
+      height: 520px;
     }
 
     .platform {
       position: absolute;
-      left: 115px;
-      top: 230px;
-      width: 390px;
-      height: 150px;
-      border-radius: 34px;
-      background: linear-gradient(145deg, #314341, #162524);
-      box-shadow: 0 24px 58px rgba(0,0,0,0.22);
-      transform: perspective(700px) rotateX(58deg) rotateZ(18deg);
-      z-index: 2;
+      left: 158px;
+      top: 280px;
+      width: 322px;
+      height: 205px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #18d36b 0%, #0cad56 100%);
+      box-shadow: 0 35px 85px rgba(24, 169, 87, .32);
+      transform: skewY(-4deg);
     }
 
     .platform:after {
       content: "";
       position: absolute;
-      inset: 10px;
-      border-radius: 26px;
-      background: linear-gradient(145deg, rgba(7, 255, 112, 0.38), rgba(9, 26, 24, 0.15));
+      inset: 26px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.08);
     }
 
-    .bull {
+    .flat-bull {
       position: absolute;
-      left: 172px;
-      top: 115px;
-      width: 335px;
-      height: 250px;
-      z-index: 5;
-      transform: rotate(-6deg);
-    }
-
-    .bull-body {
-      position: absolute;
-      left: 70px;
-      top: 78px;
-      width: 230px;
-      height: 125px;
-      border-radius: 62% 48% 45% 55%;
-      background: radial-gradient(circle at 30% 28%, #e8ddc3 0%, #c7b083 42%, #927852 100%);
-      box-shadow: inset -18px -18px 24px rgba(70, 45, 18, 0.2), 0 18px 40px rgba(0,0,0,0.2);
-    }
-
-    .bull-head {
-      position: absolute;
-      left: 20px;
-      top: 115px;
-      width: 95px;
-      height: 70px;
-      border-radius: 55% 45% 50% 55%;
-      background: radial-gradient(circle at 35% 25%, #e9dec4, #b2986c 60%, #876d4a);
-      transform: rotate(-18deg);
-      box-shadow: inset -10px -8px 14px rgba(70, 45, 18, 0.18);
-    }
-
-    .bull-nose {
-      position: absolute;
-      left: 8px;
-      top: 40px;
-      width: 44px;
-      height: 28px;
-      border-radius: 50%;
-      background: #b8a176;
-      transform: rotate(-8deg);
-    }
-
-    .horn {
-      position: absolute;
-      width: 78px;
-      height: 24px;
-      border-radius: 50%;
-      border-top: 10px solid #d9caa8;
-      z-index: 7;
-    }
-
-    .horn.left {
-      left: 10px;
-      top: 82px;
-      transform: rotate(-128deg);
-    }
-
-    .horn.right {
-      left: 62px;
-      top: 75px;
-      transform: rotate(-32deg);
-    }
-
-    .leg {
-      position: absolute;
-      width: 24px;
-      height: 70px;
-      border-radius: 16px;
-      background: linear-gradient(#b69c72, #6d5638);
-      top: 178px;
+      left: 152px;
+      top: 112px;
+      width: 330px;
+      height: 230px;
       z-index: 4;
-    }
-    .l1 { left: 110px; transform: rotate(12deg); }
-    .l2 { left: 180px; transform: rotate(-4deg); }
-    .l3 { left: 248px; transform: rotate(9deg); }
-    .l4 { left: 288px; transform: rotate(-10deg); }
-
-    .tail {
-      position: absolute;
-      right: 16px;
-      top: 70px;
-      width: 44px;
-      height: 70px;
-      border-radius: 50%;
-      border-right: 9px solid #9a815a;
-      transform: rotate(-25deg);
+      filter: drop-shadow(0 22px 30px rgba(15, 23, 42, .18));
     }
 
     .chip {
       position: absolute;
-      width: 114px;
-      height: 88px;
-      border-radius: 19px;
-      background: linear-gradient(145deg, #eef3f3, #9ba9a5);
-      color: #243033;
+      width: 108px;
+      height: 86px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #eef2f3, #b9c4c0);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      letter-spacing: -0.4px;
-      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.18);
-      z-index: 6;
-      transform: rotate(-5deg);
+      color: #24313a;
+      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.16);
+      z-index: 5;
+      letter-spacing: -.2px;
     }
 
-    .chip.meta {
-      left: 80px;
-      top: 48px;
-      font-size: 24px;
+    .chip.meta { left: 86px; top: 20px; }
+    .chip.amd { right: 10px; top: 36px; font-size: 25px; }
+    .chip.tesla { right: 80px; top: 300px; height: 108px; }
+    .chip.nvda { left: 22px; bottom: 70px; }
+
+    .build-version {
+      position: fixed;
+      right: 18px;
+      bottom: 14px;
+      z-index: 99999;
+      background: #111827;
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font: 800 12px/1 Inter, Arial, sans-serif;
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+      letter-spacing: .4px;
     }
 
-    .chip.amd {
-      right: 20px;
-      top: 54px;
-      font-size: 26px;
-      background: linear-gradient(145deg, #a6b4b2, #344442);
-    }
-
-    .chip.tesla {
-      right: 92px;
-      top: 304px;
-      width: 128px;
-      height: 112px;
-      font-size: 24px;
-      transform: rotate(2deg);
-    }
-
-    .chip.nvda {
-      left: 26px;
-      bottom: 78px;
-      width: 108px;
-      height: 96px;
-      font-size: 22px;
-      transform: rotate(-7deg);
-    }
-
-    .chip.adobe {
-      right: -18px;
-      bottom: 80px;
-      width: 110px;
-      height: 92px;
-      font-size: 22px;
-      transform: rotate(5deg);
-      background: linear-gradient(145deg, #e6eeee, #9cb1ab);
-    }
-
-    .error-card {
-      width: min(560px, calc(100vw - 32px));
-      margin: 160px auto;
-      background:#181b23;
-      border:1px solid #2b3040;
-      border-radius:18px;
-      padding:28px;
-      box-shadow:0 20px 60px rgba(0,0,0,.15);
-      color:#f4f4f5;
-    }
-
-    .error-card h1 { margin:0 0 10px; font-size:26px; }
-    .error-card p { color:#ff8fa3; line-height:1.5; }
-    .error-card a {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-top:14px;
-      padding:12px 18px;
-      border-radius:12px;
-      background:#2aabee;
-      color:white;
-      text-decoration:none;
-      font-weight:700;
-    }
-
-    @media (max-width: 960px) {
-      .nav { display: none; }
+    @media (max-width: 980px) {
+      .topbar { padding: 0 16px; }
+      .nav { gap: 8px; }
       .main {
         grid-template-columns: 1fr;
-        padding: 40px 0;
-        align-items: start;
-      }
-      .left {
-        margin: 0 auto;
-        width: min(430px, 100%);
+        min-height: auto;
+        padding: 38px 20px 80px;
       }
       .right { display: none; }
-      .accounts, .tg-status { width: 100%; }
+      .login-start, .tg-status, .verification-flow, .accounts, .error-box { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div id="app"></div>
+  <header class="topbar">
+    <div class="logo">FREEDOM<span>24</span></div>
+    <div class="nav">
+      <button class="nav-btn login">Войти</button>
+      <button class="nav-btn open">Открыть счёт</button>
+      <span>Рус</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="left">
+      <h1 id="pageTitle">Вход через Telegram</h1>
+      <a class="back" href="/">← Вернуться назад</a>
+
+      <div id="startState" class="login-start">
+        <strong>Telegram Login Demo</strong>
+        <p>
+          Нажми кнопку. Telegram откроет авторизацию, а после подтверждения backend получит verified phone и Telegram ID.
+        </p>
+        <a class="tg-button" href="/api/auth-start">
+          <span class="tg-logo">➤</span>
+          Войти через Telegram
+        </a>
+      </div>
+
+      <div id="successState" style="display:none">
+        <div class="tg-status">
+          <div class="check">✓</div>
+          <div>
+            <b>Номер подтверждён через Telegram</b>
+            <div id="telegramIdentity">—</div>
+          </div>
+        </div>
+
+        <div class="verification-flow">
+          <div class="flow-step">
+            <span class="num">1</span>
+            <div>
+              <b>Telegram ID получен</b>
+              <p>tg_id: <strong id="tgIdView">—</strong></p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="num">2</span>
+            <div>
+              <b>Telegram ID сохранён</b>
+              <p>Связка сохранена: Client Profile ↔ Telegram Account</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <span class="num">3</span>
+            <div>
+              <b>Телефон сматчен с клиентом</b>
+              <p id="matchView">—</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accounts">
+          <div class="group">Freedom24</div>
+          <div class="account active">
+            <div><b>CY #1194743</b><span class="tag">Адм</span></div>
+            <strong>22 873.68 USD</strong>
+          </div>
+          <div class="account">
+            <b>CY #1492787</b>
+            <strong>105.20 EUR</strong>
+          </div>
+          <div class="account">
+            <b>CY #1646971</b>
+            <strong>0.00 USD</strong>
+          </div>
+          <div class="account">
+            <b>CY #1834050</b>
+            <strong>0.00 EUR</strong>
+          </div>
+          <div class="group">Цифра брокер</div>
+          <div class="account">
+            <b>RU #033631</b>
+            <strong>13 663.94 RUR</strong>
+          </div>
+          <div class="group">Wallet Solutions</div>
+          <div class="account">
+            <b>EE #1609128</b>
+            <strong>17.14 EUR</strong>
+          </div>
+        </div>
+      </div>
+
+      <div id="errorState" class="error-box" style="display:none"></div>
+    </section>
+
+    <section class="right">
+      <div class="hero">
+        <div class="chip meta">Meta</div>
+        <div class="chip amd">AMD</div>
+        <div class="chip tesla">TESLA</div>
+        <div class="chip nvda">NVIDIA</div>
+        <div class="platform"></div>
+
+        <svg class="flat-bull" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" aria-label="Minimal flat bull illustration">
+          <defs>
+            <linearGradient id="bullGold" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#D9C59A"/>
+              <stop offset="0.55" stop-color="#B79D6F"/>
+              <stop offset="1" stop-color="#806C49"/>
+            </linearGradient>
+            <linearGradient id="bullDark" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#8D7A55"/>
+              <stop offset="1" stop-color="#5D4B31"/>
+            </linearGradient>
+          </defs>
+
+          <path d="M88 92 C55 74 28 72 14 86 C45 99 62 121 70 151 C75 128 83 110 105 101 Z" fill="url(#bullDark)"/>
+          <path d="M322 92 C356 72 388 72 404 88 C368 101 351 124 344 152 C337 126 329 108 307 101 Z" fill="url(#bullDark)"/>
+
+          <path d="M96 88 C122 45 170 32 215 38 C262 44 302 63 324 100 C351 145 329 211 275 235 C221 260 139 245 100 205 C69 173 70 129 96 88 Z" fill="url(#bullGold)"/>
+          <path d="M123 108 C147 80 185 70 222 76 C262 82 292 101 305 132 C323 176 294 217 246 228 C199 239 142 224 119 194 C98 166 101 133 123 108 Z" fill="#C7AD7D" opacity=".55"/>
+
+          <path d="M128 160 C137 135 161 123 184 132 C204 140 211 161 203 182 C194 205 160 209 142 194 C130 184 124 174 128 160 Z" fill="#F3E4BE" opacity=".68"/>
+          <path d="M220 158 C230 135 257 124 279 135 C298 145 303 169 291 190 C278 211 244 209 228 191 C218 180 214 169 220 158 Z" fill="#F3E4BE" opacity=".68"/>
+
+          <path d="M196 178 C206 169 223 169 234 178 C228 193 203 193 196 178 Z" fill="#5D4B31"/>
+          <path d="M166 141 C177 134 189 134 201 142" stroke="#493B28" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M246 142 C258 134 271 134 282 141" stroke="#493B28" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <circle cx="182" cy="154" r="8" fill="#2E261B"/>
+          <circle cx="264" cy="154" r="8" fill="#2E261B"/>
+
+          <path d="M112 212 C90 226 70 250 55 272" stroke="#6B583A" stroke-width="16" stroke-linecap="round"/>
+          <path d="M292 214 C319 229 339 251 353 272" stroke="#6B583A" stroke-width="16" stroke-linecap="round"/>
+          <path d="M163 230 C150 248 143 260 135 274" stroke="#6B583A" stroke-width="15" stroke-linecap="round"/>
+          <path d="M242 234 C254 249 263 262 273 274" stroke="#6B583A" stroke-width="15" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <div class="build-version">VERSION TN-DEMO v4.0</div>
 
   <script>
     const params = new URLSearchParams(location.search);
-    const app = document.getElementById('app');
 
-    const name = params.get('name') || 'Мария';
-    const username = params.get('username') || 'MariiaShumova';
-    const phone = params.get('phone') || '79104133562';
+    const startState = document.getElementById('startState');
+    const successState = document.getElementById('successState');
+    const errorState = document.getElementById('errorState');
+    const pageTitle = document.getElementById('pageTitle');
 
-    function accountScreen() {
-      app.innerHTML = `
-        <header class="topbar">
-          <div class="top-inner">
-            <div class="brand">
-              <div class="brand-shield"></div>
-              FREEDOM<span>24</span>
-            </div>
-
-            <nav class="nav">
-              <a class="nav-link" href="#">
-                <span class="grid-icon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-                Сервисы
-              </a>
-              <a class="nav-link" href="#">Тарифы</a>
-              <a class="nav-link" href="#">О нас</a>
-            </nav>
-
-            <div class="top-actions">
-              <button class="login-btn">Войти</button>
-              <button class="open-btn">Открыть счёт</button>
-              <span>Рус</span>
-              <span class="hamb">≡</span>
-            </div>
-          </div>
-        </header>
-
-        <main class="main">
-          <section class="left">
-            <h1>Выберите счёт</h1>
-            <a class="back" href="#">← Вернуться назад</a>
-
-            <div class="tg-status">
-              <div class="check">✓</div>
-              <div>
-                <b>Номер подтверждён через Telegram</b>
-                <small>${escapeHtml(name)} · @${escapeHtml(username)} · ${escapeHtml(phone)}</small>
-              </div>
-            </div>
-
-            <div class="accounts">
-              <div class="group">Freedom24</div>
-
-              <div class="account active">
-                <div><b>CY #1194743</b><span class="badge">Адм</span></div>
-                <strong>22 873.68 USD</strong>
-              </div>
-
-              <div class="account">
-                <b>CY #1492787</b>
-                <strong>105.20 EUR</strong>
-              </div>
-
-              <div class="account">
-                <b>CY #1646971</b>
-                <strong>0.00 USD</strong>
-              </div>
-
-              <div class="account">
-                <b>CY #1834050</b>
-                <strong>0.00 EUR</strong>
-              </div>
-
-              <div class="account">
-                <b>CY #1834075</b>
-                <strong>0.00 EUR</strong>
-              </div>
-
-              <div class="group">Цифра брокер</div>
-
-              <div class="account">
-                <b>RU #033631</b>
-                <strong>13 663.94 RUR</strong>
-              </div>
-
-              <div class="group">Wallet Solutions</div>
-
-              <div class="account">
-                <b>EE #1609128</b>
-                <strong>17.14 EUR</strong>
-              </div>
-
-              <div class="crypto">Крипто счет</div>
-
-              <div class="group">TFOS</div>
-
-              <div class="account">
-                <b>ZA #1742683</b>
-                <strong>0.00 USD</strong>
-              </div>
-
-              <div class="account">
-                <b>ZA #D1742683</b>
-                <strong>0.00 USD</strong>
-              </div>
-            </div>
-          </section>
-
-          <section class="right">
-            <div class="hero">
-              <div class="chip meta">∞ Meta</div>
-              <div class="chip amd">AMD</div>
-              <div class="chip tesla">TESLA</div>
-              <div class="chip nvda">NVIDIA</div>
-              <div class="chip adobe">Adobe</div>
-
-              <div class="cube"></div>
-              <div class="platform"></div>
-
-              <div class="bull">
-                <div class="tail"></div>
-                <div class="horn left"></div>
-                <div class="horn right"></div>
-                <div class="bull-body"></div>
-                <div class="bull-head"><div class="bull-nose"></div></div>
-                <div class="leg l1"></div>
-                <div class="leg l2"></div>
-                <div class="leg l3"></div>
-                <div class="leg l4"></div>
-              </div>
-            </div>
-          </section>
-        </main>
-      `;
+    function normalizePhone(phone) {
+      return String(phone || '').replace(/[^0-9]/g, '');
     }
 
-    function loginScreen() {
-      app.innerHTML = `
-        <div class="error-card">
-          <h1>Telegram Login Demo</h1>
-          <p style="color:#a8b0c2">Нажми кнопку. Telegram откроет авторизацию, а потом вернёт тебя на callback. Никакой код руками вводить не нужно.</p>
-          <a href="/api/auth-start">Log in with Telegram</a>
-        </div>
-      `;
+    function formatPhone(phone) {
+      const clean = normalizePhone(phone);
+      if (!clean) return '—';
+      if (clean.startsWith('357') && clean.length >= 11) {
+        return '+' + clean.slice(0, 3) + ' ' + clean.slice(3, 5) + ' ' + clean.slice(5, 8) + ' ' + clean.slice(8);
+      }
+      return '+' + clean;
     }
 
-    function errorScreen(error, details) {
-      app.innerHTML = `
-        <div class="error-card">
-          <h1>Ошибка входа</h1>
-          <p>${escapeHtml(error || 'unknown_error')}</p>
-          ${details ? `<pre style="white-space:pre-wrap;background:#10131a;border:1px solid #2b3040;padding:14px;border-radius:12px;color:#bfe3ff;">${escapeHtml(details)}</pre>` : ''}
-          <a href="/api/auth-start">Попробовать снова</a>
-        </div>
-      `;
-    }
-
-    function escapeHtml(value) {
+    function esc(value) {
       return String(value || '')
         .replaceAll('&', '&amp;')
         .replaceAll('<', '&lt;')
@@ -670,12 +549,32 @@
         .replaceAll("'", '&#039;');
     }
 
+    if (params.get('success') === '1') {
+      const name = params.get('name') || 'Maria Shumova';
+      const username = params.get('username') || 'telegram_user';
+      const phone = params.get('phone') || '+35799342470';
+      const tgId = params.get('tg_id') || params.get('sub') || '406442417';
+      const formattedPhone = formatPhone(phone);
+
+      pageTitle.textContent = 'Выберите счёт';
+      startState.style.display = 'none';
+      successState.style.display = 'block';
+
+      document.getElementById('telegramIdentity').textContent =
+        `${name} · @${username} · ${formattedPhone}`;
+
+      document.getElementById('tgIdView').textContent = tgId;
+      document.getElementById('matchView').textContent =
+        `${formattedPhone} → CY #1194743 · ${name}`;
+    }
+
     if (params.get('error')) {
-      errorScreen(params.get('error'), params.get('details'));
-    } else if (params.get('success') === '1') {
-      accountScreen();
-    } else {
-      loginScreen();
+      pageTitle.textContent = 'Ошибка входа';
+      errorState.style.display = 'block';
+      errorState.innerHTML =
+        '<strong>Telegram login failed</strong><br>' +
+        'Error: ' + esc(params.get('error')) +
+        (params.get('details') ? '<br>Details: ' + esc(params.get('details')) : '');
     }
   </script>
 </body>

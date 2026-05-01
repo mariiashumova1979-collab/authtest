@@ -288,13 +288,7 @@
       line-height: 1.45;
     }
 
-    .right {
-      min-height: 620px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    
     .hero {
       position: relative;
       width: 560px;
@@ -374,7 +368,6 @@
         min-height: auto;
         padding: 38px 20px 80px;
       }
-      .right { display: none; }
       .login-start, .tg-status, .verification-flow, .accounts, .error-box { width: 100%; }
     }
   </style>
@@ -472,49 +465,7 @@
       <div id="errorState" class="error-box" style="display:none"></div>
     </section>
 
-    <section class="right">
-      <div class="hero">
-        <div class="chip meta">Meta</div>
-        <div class="chip amd">AMD</div>
-        <div class="chip tesla">TESLA</div>
-        <div class="chip nvda">NVIDIA</div>
-        <div class="platform"></div>
-
-        <svg class="flat-bull" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" aria-label="Minimal flat bull illustration">
-          <defs>
-            <linearGradient id="bullGold" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#D9C59A"/>
-              <stop offset="0.55" stop-color="#B79D6F"/>
-              <stop offset="1" stop-color="#806C49"/>
-            </linearGradient>
-            <linearGradient id="bullDark" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#8D7A55"/>
-              <stop offset="1" stop-color="#5D4B31"/>
-            </linearGradient>
-          </defs>
-
-          <path d="M88 92 C55 74 28 72 14 86 C45 99 62 121 70 151 C75 128 83 110 105 101 Z" fill="url(#bullDark)"/>
-          <path d="M322 92 C356 72 388 72 404 88 C368 101 351 124 344 152 C337 126 329 108 307 101 Z" fill="url(#bullDark)"/>
-
-          <path d="M96 88 C122 45 170 32 215 38 C262 44 302 63 324 100 C351 145 329 211 275 235 C221 260 139 245 100 205 C69 173 70 129 96 88 Z" fill="url(#bullGold)"/>
-          <path d="M123 108 C147 80 185 70 222 76 C262 82 292 101 305 132 C323 176 294 217 246 228 C199 239 142 224 119 194 C98 166 101 133 123 108 Z" fill="#C7AD7D" opacity=".55"/>
-
-          <path d="M128 160 C137 135 161 123 184 132 C204 140 211 161 203 182 C194 205 160 209 142 194 C130 184 124 174 128 160 Z" fill="#F3E4BE" opacity=".68"/>
-          <path d="M220 158 C230 135 257 124 279 135 C298 145 303 169 291 190 C278 211 244 209 228 191 C218 180 214 169 220 158 Z" fill="#F3E4BE" opacity=".68"/>
-
-          <path d="M196 178 C206 169 223 169 234 178 C228 193 203 193 196 178 Z" fill="#5D4B31"/>
-          <path d="M166 141 C177 134 189 134 201 142" stroke="#493B28" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <path d="M246 142 C258 134 271 134 282 141" stroke="#493B28" stroke-width="8" stroke-linecap="round" fill="none"/>
-          <circle cx="182" cy="154" r="8" fill="#2E261B"/>
-          <circle cx="264" cy="154" r="8" fill="#2E261B"/>
-
-          <path d="M112 212 C90 226 70 250 55 272" stroke="#6B583A" stroke-width="16" stroke-linecap="round"/>
-          <path d="M292 214 C319 229 339 251 353 272" stroke="#6B583A" stroke-width="16" stroke-linecap="round"/>
-          <path d="M163 230 C150 248 143 260 135 274" stroke="#6B583A" stroke-width="15" stroke-linecap="round"/>
-          <path d="M242 234 C254 249 263 262 273 274" stroke="#6B583A" stroke-width="15" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </section>
+    
   </main>
 
   <div class="build-version">VERSION TN-DEMO v4.0</div>
